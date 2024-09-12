@@ -1,0 +1,2 @@
+# Ignore compiled wasm files
+*.wasm
