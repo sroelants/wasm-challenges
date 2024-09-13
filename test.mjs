@@ -65,6 +65,15 @@ challenge("06_sum_array", (wasm) => {
   equal(sum(0), 0); // zero is a bit of an edge case
 });
 
+challenge("07_max", (wasm) => {
+  const max = expectFunc(wasm.instance.exports.max);
+  equal(max(1, 10), 10);
+  equal(max(10, 1), 10);
+  equal(max(0, 1), 1);
+  equal(max(100, 99), 100);
+  equal(max(0, 0), 0);
+});
+
 // Testing functions
 
 /**
