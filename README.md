@@ -1,11 +1,23 @@
-# WebAssembly Challenges
-Tiny programming challenges designed as exercises for learning WebAssembly through writing your own [`.wat`](https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format) files.
+# WASM Challenges
+Tiny programming challenges designed for learning about WebAssembly by writing your own [`.wat`](https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format) files.
 
-Run `./tests.mjs` to compile the text format files to WebAssembly and run the tests.
+Each challenge has a `.wat` file where you'll need to implement a WebAssembly module to pass tests in `tests.mjs`.
 
-Requires [`node`](https://nodejs.org) and [`wabt`](https://github.com/WebAssembly/wabt).
+Run `node tests.mjs` to run the tests.
 
-- [ ] Design a simple allocator
+## Dependencies
+- [`node`](https://nodejs.org)
+- [`wabt`](https://github.com/WebAssembly/wabt)
+
+## Resources
+- [Understanding WebAssembly text format](https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format)
+- [WebAssembly instruction reference](https://developer.mozilla.org/en-US/docs/WebAssembly/Reference)
+- [WebAssembly specification](https://webassembly.github.io/spec/core/)
+- [WebAssembly core test suite](https://github.com/WebAssembly/spec/tree/main/test/core)
+
+## Ideas
+
+- [ ] Bump allocator
 - [ ] Implement a set data structure
 - [ ] Hash function
 - [ ] Sorting
@@ -13,6 +25,8 @@ Requires [`node`](https://nodejs.org) and [`wabt`](https://github.com/WebAssembl
 - [ ] Run length encoding
 - [ ] Checksum
 - [ ] XOR cipher
+- [ ] Substitution cipher
+- [ ] Rot13 cipher
 - [ ] Manhattan distance
 - [ ] Euclidean distance
 - [ ] Vector add
@@ -24,12 +38,9 @@ Requires [`node`](https://nodejs.org) and [`wabt`](https://github.com/WebAssembl
 - [ ] Median, mode
 - [ ] Simple calculator (op, lhs, rhs => res)
 - [ ] Vowel checker
-
-## Theme
-It would be fun to give these exercises all a theme so that the whole thing felt a little bit more cohesive. Norse mythology? Robots?
-
-## String Notes
-Exercises that deal with strings will usually encode the strings as ASCII, where each character maps to exactly one byte.
+- [ ] Battlebits (battleships but each ship is a bit)
+- [ ] Turtle (interpret instructions for a turtle on an infinite grid)
+- [ ] Word guess (word in memory, have the player guess the chars one at a time, -1 for a miss, 0 for a hit, 1 for a win)
 
 ## Poker Notes
 The poker exercises require you to read values from five cards, which are stored in memory as pairs of `i32` values. The first is the _face value_ and the second is the _suit value_.

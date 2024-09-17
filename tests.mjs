@@ -1,11 +1,16 @@
-#!/usr/bin/env node
-
 // @ts-check
 
-import { readFileSync } from "node:fs";
-import { equal, match, ok } from "node:assert";
-import { test } from "node:test";
-import { execSync } from "node:child_process";
+import { equal } from "node:assert";
+import {
+  challenge,
+  expectFunc,
+  expectMemory,
+  parseBitboard,
+  setMemoryFloat32,
+  setMemoryInt32,
+  setMemoryStringAscii,
+  todo,
+} from "./utils.mjs";
 
 challenge("increment", (wasm) => {
   const increment = expectFunc(wasm.instance.exports.increment);
@@ -417,9 +422,6 @@ todo("char_search_ascii", (wasm) => {
   equal(search(","), 5);
 });
 
-todo("search_number", (wasm) => {});
-todo("search_string", (wasm) => {});
-
 challenge("bracket_matching", (wasm) => {
   const _matching = expectFunc(wasm.instance.exports.matching);
   const memory = expectMemory(wasm.instance.exports.memory);
@@ -452,145 +454,30 @@ challenge("bracket_matching", (wasm) => {
   equal(matching("[][][]["), 0);
 });
 
-// TODO: Maybe start with a brainfuck without loops
-todo("brainfuck", (wasm) => {});
+todo("char_search"); // Search for the index of a character within a string
+todo("string_search"); // Search for the index of a substring
+todo("brainfuck"); // Brainfuck interpreter
+todo("life32"); // Game of life using a 5x5 board encoded as an i32
+todo("life"); // Game of life using a 100x100 board in memory
+todo("bump_allocator"); // Implement a simple bump allocator
+todo("hash_djb2"); // djb2 hash function
+todo("run_length_encoding"); // Run-length encoding
+todo("rot13_cipher"); // Rot13 cipher
+todo("xor_cipher"); // XOR Cipher with a key
+todo("substitution_cipher"); // Cipher with a custom alphabet
+todo("checksum"); // Adler-32 checksum
+todo("manhattan_distance"); // Find manhattan distance between points
+todo("euclidean_distance"); // Find euclidean distance between points
+todo("ipv4_validation"); // Validate an ipv4 address
+todo("ipv6_validation"); // Validate an ipv6 address
+todo("pangrams"); // Check whether a string contains every letter of the alphabet
+todo("utf8_length"); // Find the length of a utf8 string
+todo("simple_calculator"); // calc(op, lhs, rhs)
+todo("median"); // Find the median from a list of i32s
+todo("mode"); // Find the mode from a list of i32s
+todo("battlebits"); // Battleships where each ship is a single bit
+todo("turtle_movement"); // Interpreting turtle movement commands
+todo("turtle_drawing"); // Interpreting turtle drawing commands
+todo("multiple_turtles"); // Allowing multiple turtles in parallel
+todo("guess_the_word"); // Simple hangman/wordle where 
 
-todo("tiny_life", (wasm) => {
-  // TODO: Simulate a step of the game of life using a 5x5 board encoded as an i32.
-});
-
-todo("real_life", (wasm) => {
-  // TODO: Simulate a step of the game of life using a 100x100 board in memory.
-});
-
-// Testing functions
-
-/**
- * @param {string} name
- * @param {(source: WebAssembly.WebAssemblyInstantiatedSource) => void} callback
- */
-async function challenge(name, callback) {
-  return test(name, async () => {
-    execSync(`wat2wasm ${name}.wat`);
-    const buffer = readFileSync(`${name}.wasm`);
-    const imports = { console: { log: console.log } };
-    const wasm = await WebAssembly.instantiate(buffer, imports);
-    callback(wasm);
-  });
-}
-
-/**
- * A challenge that hasn't been written or solved yet.
- * @param {string} name
- * @param {(source: WebAssembly.WebAssemblyInstantiatedSource) => void} callback
- */
-function todo(name, callback) {
-  // Do nothing!
-  test.todo(name);
-}
-
-/**
- * Check that the value of the web assembly export is a function and return it.
- * @param {WebAssembly.ExportValue} exportValue
- * @returns {Function}
- */
-function expectFunc(exportValue) {
-  ok(
-    typeof exportValue === "function",
-    "Expected export to be a WebAssembly function!",
-  );
-  return exportValue;
-}
-
-/**
- * @param {WebAssembly.ExportValue} exportValue
- * @returns {WebAssembly.Memory}
- */
-function expectMemory(exportValue) {
-  ok(
-    exportValue instanceof WebAssembly.Memory,
-    "Expected export to be WebAssembly memory!",
-  );
-  return exportValue;
-}
-
-/**
- * Reset memory to zeros.
- * @param {WebAssembly.Memory} memory
- */
-function resetMemory(memory) {
-  new Uint8Array(memory.buffer).fill(0);
-}
-
-/**
- * @param {WebAssembly.Memory} memory
- * @param {ArrayLike<number>} values
- */
-function setMemoryInt32(memory, values) {
-  if (memory.buffer.byteLength === 0) {
-    memory.grow(1); // TODO: I don't think this is necessary because we do
-    // `(memory 1)` on the WASM side.
-  }
-
-  const view = new DataView(memory.buffer);
-
-  for (let i = 0; i < values.length; i++) {
-    view.setInt32(i * 4, values[i], true);
-  }
-}
-
-/**
- * @param {WebAssembly.Memory} memory
- * @param {ArrayLike<number>} values
- */
-function setMemoryFloat32(memory, values) {
-  if (memory.buffer.byteLength === 0) {
-    memory.grow(1);
-  }
-
-  const view = new DataView(memory.buffer);
-
-  for (let i = 0; i < values.length; i++) {
-    view.setFloat32(i * 4, values[i], true);
-  }
-}
-
-/**
- * @param {WebAssembly.Memory} memory
- * @param {string} string
- * @param {number} [offset]
- */
-function setMemoryStringAscii(memory, string, offset) {
-  if (offset === undefined) {
-    resetMemory(memory);
-    offset = 0;
-  }
-
-  if (memory.buffer.byteLength === 0) {
-    memory.grow(1);
-  }
-
-  const view = new DataView(memory.buffer);
-  view;
-
-  for (let i = 0; i < string.length; i++) {
-    let code = string.charCodeAt(i);
-    ok(code <= 0x0080, `Cannot encode non-ASCII character: ${string[i]}`);
-    view.setUint8(offset + i, string.charCodeAt(i));
-  }
-}
-
-/**
- * Parses a bitboard as though the top left bit is the first one. If we wrote
- * the bitboard out as a binary literal, the first bit in the literal will
- * actually be the last bit in memory, which makes it tricky to visually
- * compare for tests.
- * @param {(0 | 1)[]} bits
- */
-function parseBitboard(...bits) {
-  let board = 0;
-  for (let i = 0; i < bits.length; i++) {
-    board |= bits[i] << i;
-  }
-  return board;
-}
