@@ -1,23 +1,39 @@
 # WASM Challenges
 
-Tiny programming challenges designed for learning about WebAssembly by writing your own [`.wat`](https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format) files.
+Tiny programming challenges designed for learning about WebAssembly by writing it by hand.
 
-Each challenge has a `.wat` file where you'll need to implement a WebAssembly module to pass tests in `tests.mjs`.
+> [!WARNING]
+> The challenge files currently have _my_ solutions in, but I'll remove the solutions once I finish implementing the challenges.
+
+Each challenge has a [`.wat`][wat] file where you'll need to implement a WebAssembly module to pass the tests in `tests.mjs`.
 
 Run `node tests.mjs` to run the tests.
 
 ## Dependencies
 
+To run the tests and compile `.wat` to `.wasm`, you'll need the following dependencies.
+
 - [`node`](https://nodejs.org)
 - [`wabt`](https://github.com/WebAssembly/wabt)
 
+## Why?
+
+I created these challenges because I wanted to solve a set of simple problems to practice writing WebAssembly, however, most programming exercises online are designed for higher level languages and would be tedious to solve with handwritten assembly.
+
 ## Resources
+
+The challenges won't teach you about WAT syntax or WebAssembly instructions directly, so you'll need to do some WebAssembly-specific reading alongside.
+
 - [Understanding WebAssembly text format](https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format)
 - [WebAssembly instruction reference](https://developer.mozilla.org/en-US/docs/WebAssembly/Reference)
 - [WebAssembly specification](https://webassembly.github.io/spec/core/)
-- [WebAssembly core test suite](https://github.com/WebAssembly/spec/tree/main/test/core)
+
+Whilst not technically a reference, I found the [WebAssembly core test suite](https://github.com/WebAssembly/spec/tree/main/test/core) incredibly helpful for some exhaustive learning about the various instructions. The files are `.wast` and they include some testing directives, but otherwise they are all valid `.wat`.
+
+The challenges also assume you have a programming background and are comfortable with some low-level concepts such as binary representations, bitwise operations, memory and pointers.
 
 ## Debugging
+
 Every challenge can import functions for logging debug values at runtime.
 
 ```wat
@@ -78,3 +94,5 @@ For example, the string `"Hello, world"` would be stored in memory as:
 | `0x48` | `0x65` | `0x6C` | `0x6C` | `0x6F` | `0x2C` | `0x20` | `0x77` | `0x6F` | `0x72` | `0x6C` | `0x64` | `0x00` |
 
 The strings are null-terminated, which means they always end with a `NUL` byte (`0x00`).
+
+[wat]: https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format
