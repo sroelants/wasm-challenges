@@ -7,32 +7,28 @@
     global.set $state
   )
 
-  ;; Returns pseudo-random numbers between 0 and 1 with an implementation of
-  ;; xorshift32: https://en.wikipedia.org/wiki/Xorshift
-  (func (export "xorshift32") (result f32)
-    global.get $state
-    i32.const 13
-    i32.shl
-    global.get $state
-    i32.xor
-    global.set $state
+  ;; Returns pseudo-random numbers from an implementation of xorshift32.
+  ;; See https://en.wikipedia.org/wiki/Xorshift.
+  (func (export "xorshift32") (result i32)
+    ;; $state ^= $state << 13;
+    ;; $state ^= $state >> 17;
+    ;; $state ^= $state << 5;
+
+    (global.set $state
+      (i32.xor
+        (global.get $state)
+        (i32.shl (global.get $state) (i32.const 13))))
+
+    (global.set $state
+      (i32.xor
+        (global.get $state)
+        (i32.shr_u (global.get $state) (i32.const 17))))
+
+    (global.set $state
+      (i32.xor
+        (global.get $state)
+        (i32.shl (global.get $state) (i32.const 5))))
 
     global.get $state
-    i32.const 17 i32.shr_s
-    global.get $state
-    i32.xor
-    global.set $state
-
-    global.get $state
-    i32.const 5
-    i32.shl
-    global.get $state
-    i32.xor
-    global.set $state
-
-    global.get $state
-    f32.convert_i32_u
-    f32.const 4294967296
-    f32.div
   )
 )

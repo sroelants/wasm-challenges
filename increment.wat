@@ -1,9 +1,6 @@
 (module
-  ;; Increment the parameter value by 1 and return it.
-  (func (export "increment") (param i32) (result i32)
-    local.get 0
-    i32.const 1
-    i32.add
+  ;; Increment the parameter by 1 and return the value.
+  (func (export "increment") (param $x i32) (result i32)
+    (i32.add (local.get $x) (i32.const 1))
   )
 )
-

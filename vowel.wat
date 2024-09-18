@@ -1,6 +1,6 @@
 (module
   ;; Returns 1 if $char is a vowel (aeiou) and 0 otherwise.
-  (func (export "isVowel") (param $char i32) (result i32)
+  (func (export "vowel") (param $char i32) (result i32)
     (block $test
       (br_if $test (i32.eq (local.get $char) (i32.const 0x41))) ;; A
       (br_if $test (i32.eq (local.get $char) (i32.const 0x45))) ;; E
@@ -14,9 +14,9 @@
       (br_if $test (i32.eq (local.get $char) (i32.const 0x6f))) ;; o
       (br_if $test (i32.eq (local.get $char) (i32.const 0x75))) ;; u
 
-      i32.const 0
-      return
+      (return (i32.const 0))
     )
+
     i32.const 1
   )
 )

@@ -1,48 +1,40 @@
 (module
-  (memory (export "hand") 1)
+  (memory (export "memory") 1)
 
-  ;; Returns the face value of the highest card. See "Poker Notes" in the
-  ;; README.md for more information about the card representations. Remember
-  ;; that aces are high!
-  (func (export "high_card") (result i32)
-    (local $high i32)
-    (local $card i32)
+  ;; Analyse the five card poker hand in memory (see "Poker Notes" in README)
+  ;; and return the _rank value_ of the highest card. Remember that A is high!
+  (func (export "high") (result i32)
     (local $i i32)
+    (local $hi i32)
+    (local $val i32)
 
     (loop $loop
-      ;; Calculate the memory address of the card $i.
-      local.get $i
-      i32.const 4
-      i32.mul         ;; Multiply $i by 4 to find the i32 which contains the card's value.
-      i32.load        ;; Load the i32 into memory.
-      local.set $card ;;
+      (local.set $val (call $rank (local.get $i)))
 
-      ;; Test if $card is higher than $high.
-      local.get $card
-      local.get $high
-      i32.gt_s
+      ;; If we find an ace, return it immediately, as we know there can't be
+      ;; any higher cards.
+      (if (i32.eq (local.get $val) (i32.const 1))
+        (then (return (i32.const 1)))
+      )
 
-      ;; Test if card is an ace
-      local.get $card
-      i32.const 1
-      i32.eq
+      ;; If $val > $hi, set $hi = $val
+      (if
+        (i32.gt_s (local.get $val) (local.get $hi))
+        (then (local.set $hi (local.get $val)))
+      )
 
-      i32.or
-      if
-        local.get $card
-        local.set $high
-      end
-
-      ;; Increment loop counter and continue if $i < 5.
-      local.get $i
-      i32.const 1
-      i32.add
-      local.tee $i
-      i32.const 5
-      i32.lt_s
-      br_if $loop
+      (local.set $i (i32.add (local.get $i) (i32.const 1)))
+      (br_if $loop (i32.lt_s (local.get $i) (i32.const 5)))
     )
 
-    local.get $high
+    (local.get $hi)
+  )
+
+  ;; Return the rank of the $nth card.
+  (func $rank (param $n i32) (result i32)
+    (i32.and
+      (i32.load (i32.mul (local.get $n) (i32.const 2)))
+      (i32.const 0xff)
+    )
   )
 )

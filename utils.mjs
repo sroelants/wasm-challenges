@@ -1,9 +1,18 @@
 // @ts-check
 
 import { readFileSync } from "node:fs";
-import { ok } from "node:assert";
+import { fail, ok } from "node:assert";
 import { execSync } from "node:child_process";
 import test from "node:test";
+
+const debug = {
+  i32: (n) => console.log(n),
+  i64: (n) => console.log(n),
+  f32: (n) => console.log(n),
+  f64: (n) => console.log(n),
+  bool: (n) => console.log(n ? true : false),
+  char: (n) => console.log(String.fromCharCode(n)),
+}
 
 /**
  * Defines a challenge.
@@ -15,7 +24,7 @@ export async function challenge(name, callback) {
     // Compile to /tmp to keep the directory a bit cleaner
     execSync(`wat2wasm ${name}.wat -o /tmp/${name}.wasm`);
     const buffer = readFileSync(`/tmp/${name}.wasm`);
-    const imports = { console: { log: console.log } };
+    const imports = { debug };
     const wasm = await WebAssembly.instantiate(buffer, imports);
     callback(wasm);
   });
@@ -28,7 +37,7 @@ export async function challenge(name, callback) {
  */
 export function todo(name, callback) {
   // Do nothing!
-  test.todo(name);
+  test.skip(name);
 }
 
 /**
@@ -80,6 +89,18 @@ export function setMemoryInt32(memory, values) {
  * @param {WebAssembly.Memory} memory
  * @param {ArrayLike<number>} values
  */
+export function setMemoryUint8(memory, values) {
+  const view = new DataView(memory.buffer);
+
+  for (let i = 0; i < values.length; i++) {
+    view.setUint8(i, values[i]);
+  }
+}
+
+/**
+ * @param {WebAssembly.Memory} memory
+ * @param {ArrayLike<number>} values
+ */
 export function setMemoryFloat32(memory, values) {
   const view = new DataView(memory.buffer);
 
@@ -114,6 +135,7 @@ export function setMemoryStringAscii(memory, string, offset) {
  * actually be the last bit in memory, which makes it tricky to visually
  * compare for tests.
  * @param {(0 | 1)[]} bits
+ * @return {number}
  */
 export function parseBitboard(...bits) {
   let board = 0;
@@ -122,3 +144,48 @@ export function parseBitboard(...bits) {
   }
   return board;
 }
+
+/**
+ * Format an i32 as a single hex string.
+ * @param {number} value
+ * @return {string}
+ */
+export function hex(value) {
+  return value
+    .toString(16)
+    .padStart(8, "0")
+    .replace(/^(-?)(.*)/, "$10x$2");
+}
+
+/**
+ * @param {string} char
+ * @returns The ASCII value of the char.
+ */
+export function ascii(char) {
+  return char.charCodeAt(0);
+}
+
+/**
+ * Test whether two numbers are close to being equal.
+ * @param {number} actual
+ * @param {number} expected
+ * @param {string} [message]
+ */
+export function equalClose(
+  actual,
+  expected,
+  message = `${actual} is not close to ${expected}`,
+) {
+  if (Math.abs(actual - expected) > 0.01) {
+    fail(message);
+  }
+}
+
+export const SPADES = 0;
+export const CLUBS = 1;
+export const HEARTS = 2;
+export const DIAMONDS = 3;
+export const J = 11;
+export const Q = 12;
+export const K = 13;
+export const A = 1;

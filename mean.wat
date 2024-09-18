@@ -1,35 +1,35 @@
 (module
   (memory (export "memory") 1)
 
-  ;; Find the mean value of the first $length f32 values in memory.
-  (func (export "mean") (param $length i32) (result f32)
+  ;; Find the mean of the first $n f32 numbers in memory.
+  ;; If $n <= 0, return 0.
+  ;;
+  ;; See https://en.wikipedia.org/wiki/Arithmetic_mean
+  (func (export "mean") (param $n i32) (result f32)
     (local $i i32)
     (local $total f32)
 
-    ;; Return immediately if $i is 0
-    (i32.eqz (local.get $length))
-    if
-      f32.const 0
-      return
-    end
-
-    (loop $loop
-      ;; The next f32 will be at the address $i * 4
-      (i32.mul (local.get $i) (i32.const 4))
-      ;; Add to the total value
-      (f32.add (f32.load) (local.get $total))
-      local.set $total
-
-      ;; Increment $i
-      (i32.add (local.get $i) (i32.const 1))
-      ;; Continue if i <= $length
-      (i32.lt_s (local.tee $i) (local.get $length))
-      br_if $loop
+    (if
+      (i32.le_s (local.get $n) (i32.const 0)) ;; $n <= 0
+      (then (return (f32.const 0)))
     )
 
-    local.get $total
-    local.get $length
-    f32.convert_i32_s
-    f32.div
+    (loop $loop
+      (local.set $total
+        (f32.add
+          (local.get $total)
+          ;; Load the f32 at $i * 4 (there are 4 bytes per f32)
+          (f32.load (i32.mul (local.get $i) (i32.const 4)))
+        )
+      )
+
+      (local.set $i (i32.add (local.get $i) (i32.const 1))) ;; $i += 1
+      (br_if $loop (i32.lt_s (local.get $i) (local.get $n))) ;; $i < $n
+    )
+
+    (f32.div
+      (local.get $total)
+      (f32.convert_i32_s (local.get $n))
+    )
   )
 )
