@@ -1138,16 +1138,16 @@ challenge("strcmp", wasm => {
   const memory = expectMemory(wasm.instance.exports.memory);
 
   // Empty string edge case
-  //setMemoryStringAscii(memory, "");
-  //equal(strcmp(0, 0), 1);
+  setMemoryStringAscii(memory, "");
+  equal(strcmp(0, 0), 1);
 
-  //// Same pointer
-  //setMemoryStringAscii(memory, "hello");
-  //equal(strcmp(0, 0), 1);
+  // Same pointer
+  setMemoryStringAscii(memory, "hello");
+  equal(strcmp(0, 0), 1);
 
-  //// Same strings
-  //setMemoryStringAscii(memory, "hello\0hello");
-  //equal(strcmp(0, 6), 1);
+  // Same strings
+  setMemoryStringAscii(memory, "hello\0hello");
+  equal(strcmp(0, 6), 1);
 
   // Different strings
   setMemoryStringAscii(memory, "abc\0xyz");
