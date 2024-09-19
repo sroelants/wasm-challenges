@@ -1349,11 +1349,45 @@ challenge("utf8_length", (wasm) => {
   equal(strlen(), 6);
 });
 
+challenge("pangrams", (wasm) => {
+  const pangram = expectFunc(wasm.instance.exports.pangram);
+  const memory = expectMemory(wasm.instance.exports.memory);
+
+  setMemoryStringAscii(memory, "");
+  equal(pangram(), 0);
+
+  setMemoryStringAscii(memory, "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+  equal(pangram(), 1);
+
+  setMemoryStringAscii(memory, "abcdefghijklmnopqrstuvwxyz");
+  equal(pangram(), 1);
+
+  setMemoryStringAscii(memory, "ABCDEFGHIJKLMnopqrstuvwxyz");
+  equal(pangram(), 1);
+
+  // Duplicate letters are fine
+  setMemoryStringAscii(memory, "aabcdefghijklmnopqrstuvwxyz");
+  equal(pangram(), 1);
+
+  // Famous pangrams
+  setMemoryStringAscii(memory, "Sphinx of black quartz, judge my vow.");
+  equal(pangram(), 1);
+  setMemoryStringAscii(memory, "Pack my box with five dozen liquor jugs.");
+  equal(pangram(), 1);
+  setMemoryStringAscii(memory, "The five boxing wizards jump quickly.");
+  equal(pangram(), 1);
+
+  // Non pangrams
+  setMemoryStringAscii(memory, "THE WHOLE ALPHABET");
+  equal(pangram(), 0);
+  setMemoryStringAscii(memory, "a-z");
+  equal(pangram(), 0);
+});
+
 todo("ipv4_validation"); // Validate an ipv4 address
 todo("ipv6_validation"); // Validate an ipv6 address
 todo("run_length_encoding"); // Run-length encoding
 todo("run_length_decoding"); // Run-length decoding
-todo("pangrams"); // Check whether a string contains every letter of the alphabet
 
 // --- Cryptography Challenges ---
 
