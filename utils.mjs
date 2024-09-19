@@ -133,6 +133,23 @@ export function setMemoryStringAscii(memory, string, offset) {
 
 /**
  * @param {WebAssembly.Memory} memory
+ * @returns {string}
+ */
+export function getMemoryStringAscii(memory) {
+  const view = new Uint8Array(memory.buffer);
+  let string = "";
+
+  for (let i = 0; i < view.length; i++) {
+    const code = view[i];
+    if (code === 0x0) break;
+    string += String.fromCharCode(code);
+  }
+
+  return string;
+}
+
+/**
+ * @param {WebAssembly.Memory} memory
  * @param {string} string
  */
 export function setMemoryStringUtf8(memory, string) {
