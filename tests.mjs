@@ -1438,7 +1438,37 @@ challenge("djb2_hash", (wasm) => {
   equal(djb2(), 885799134);
 });
 
-todo("rot13_cipher"); // Rot13 cipher
+challenge("rot13_cipher", (wasm) => {
+  const rot13 = expectFunc(wasm.instance.exports.rot13);
+  const memory = expectMemory(wasm.instance.exports.memory);
+
+  /** @param {string} inputString */
+  const test = (inputString) => {
+    setMemoryStringAscii(memory, inputString);
+    rot13();
+    return getMemoryStringAscii(memory);
+  };
+
+  // Lower case string
+  equal(test("lowercase"), "ybjrepnfr");
+
+  // Upper case string
+  equal(test("HCCREPNFR"), "UPPERCASE");
+
+  // Mixed case strings
+  equal(test("Mixed Case"), "Zvkrq Pnfr");
+
+  // Non-alpha characters are unchanged
+  equal(test("|--@--|"), "|--@--|");
+
+  // Examples from wikipedia article
+  equal(
+    test("Why did the chicken cross the road?"),
+    "Jul qvq gur puvpxra pebff gur ebnq?",
+  );
+  equal(test("To get to the other side!"), "Gb trg gb gur bgure fvqr!");
+});
+
 todo("xor_cipher"); // XOR Cipher with a key
 todo("substitution_cipher"); // Cipher with a custom alphabet
 todo("checksum"); // Adler-32 checksum
