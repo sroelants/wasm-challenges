@@ -1216,6 +1216,44 @@ todo("bracket_matching", (wasm) => {
   equal(matching("[][][]["), 0);
 });
 
+challenge("parse_int", (wasm) => {
+  const parse = expectFunc(wasm.instance.exports.parse);
+  const memory = expectMemory(wasm.instance.exports.memory);
+
+  setMemoryStringAscii(memory, "1");
+  equal(parse(), 1);
+  setMemoryStringAscii(memory, "123");
+  equal(parse(), 123);
+  setMemoryStringAscii(memory, "50000");
+  equal(parse(), 50000);
+
+  // Mixed with non-integer characters
+  setMemoryStringAscii(memory, "a123b");
+  equal(parse(), -1);
+  setMemoryStringAscii(memory, "a123");
+  equal(parse(), -1);
+  setMemoryStringAscii(memory, "123b");
+  equal(parse(), -1);
+  setMemoryStringAscii(memory, " 123");
+  equal(parse(), -1);
+
+  // Leading zeros
+  setMemoryStringAscii(memory, "000");
+  equal(parse(), 0);
+  setMemoryStringAscii(memory, "0001");
+  equal(parse(), 1);
+  setMemoryStringAscii(memory, "0001000");
+  equal(parse(), 1000);
+
+  // Negative values
+  setMemoryStringAscii(memory, "-999");
+  equal(parse(), -1);
+
+  // Non-numeric characters
+  setMemoryStringAscii(memory, "Nine");
+  equal(parse(), -1);
+});
+
 todo("ipv4_validation"); // Validate an ipv4 address
 todo("ipv6_validation"); // Validate an ipv6 address
 todo("run_length_encoding"); // Run-length encoding
