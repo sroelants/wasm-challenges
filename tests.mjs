@@ -23,6 +23,7 @@ import {
   ascii,
   setMemoryStringUtf8,
   getMemoryStringAscii,
+  u32,
 } from "./utils.mjs";
 
 // --- Arithmetic Challenges ---
@@ -1413,8 +1414,51 @@ challenge("pangrams", (wasm) => {
   equal(pangram(), 0);
 });
 
-todo("ipv4_validation"); // Validate an ipv4 address
-todo("ipv6_validation"); // Validate an ipv6 address
+challenge("ipv4_parser", (wasm) => {
+  const parse = expectFunc(wasm.instance.exports.parse);
+  const memory = expectMemory(wasm.instance.exports.memory);
+
+  /**
+   * @param {string} str
+   * @param {number} expected
+   */
+  const test = (str, expected) => {
+    setMemoryStringAscii(memory, str);
+    const actual = u32(parse());
+    equal(hex(actual), hex(expected));
+  };
+
+  test("0.0.0.0", 0x00000000);
+  test("1.2.3.4", 0x01020304);
+  test("10.20.30.40", 0x0a141e28);
+  test("16.32.64.128", 0x10204080);
+  test("100.100.100.100", 0x64646464);
+  test("255.255.255.255", 0xffffffff);
+  test("255.0.0.0", 0xff000000);
+  test("0.255.0.0", 0x00ff0000);
+  test("0.0.255.0", 0x0000ff00);
+  test("0.0.0.255", 0x000000ff);
+
+  test("", 0); // Can't parse empty strings
+  test(".0.0.0", 0); // First octet is empty
+  test("0..0.0", 0); // Second octet is empty
+  test("0.0..0", 0); // Third octet is empty
+  test("0.0.0.", 0); // Fourth octet is empty
+  test("0.0.0", 0); // Not enough octets
+  test("0.0.0.0.0", 0); // Too many octets
+  test(" 0.0.0.0", 0); // Leading garbage
+  test("0.0.0.0 ", 0); // Trailing garbage
+  test("256.0.0.0", 0); // Octet value is too large
+  test("0.300.0.0", 0); // Octet value is too large
+  test("0.0.400.0", 0); // Octet value is too large
+  test("0.0.0.999", 0); // Octet value is too large
+  test("01.02.03.04", 0); // Leading zeros are not allowed
+  test("01.2.3.4", 0); // Leading zeros are not allowed
+  test("1.02.3.4", 0); // Leading zeros are not allowed
+  test("1.2.03.4", 0); // Leading zeros are not allowed
+  test("1.2.3.04", 0); // Leading zeros are not allowed
+});
+
 todo("run_length_encoding"); // Run-length encoding
 todo("run_length_decoding"); // Run-length decoding
 

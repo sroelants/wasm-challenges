@@ -176,6 +176,15 @@ export function parseBitboard(...bits) {
 }
 
 /**
+ * Create a u32 value from an i32, reinterpreting the sign bit as a significant
+ * byte.
+ * @param {number} value
+ */
+export function u32(value) {
+  return new Uint32Array([value])[0];
+}
+
+/**
  * Format an i32 as a single hex string.
  * @param {number} value
  * @return {string}
