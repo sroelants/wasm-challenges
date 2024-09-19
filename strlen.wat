@@ -4,7 +4,6 @@
   ;; Return the length of the null-terminated ASCII string in memory.
   (func (export "strlen") (result i32)
     (local $i i32)
-    (local $ch i32)
 
     (loop $loop
       (if (i32.eqz (call $get_char (local.get $i)))
