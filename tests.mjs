@@ -533,7 +533,7 @@ challenge("xorshift32", (wasm) => {
   equal(fmt(xorshift32()), fmt(0x4c6b34ac));
 });
 
-challenge("high_bit", wasm => {
+challenge("high_bit", (wasm) => {
   const high = expectFunc(wasm.instance.exports.high);
 
   // Zero has no 1 bits
@@ -1110,7 +1110,7 @@ challenge("strlen", (wasm) => {
   equal(strlen(), 12);
 });
 
-challenge("strchr", wasm => {
+challenge("strchr", (wasm) => {
   const strchr = expectFunc(wasm.instance.exports.strchr);
   const memory = expectMemory(wasm.instance.exports.memory);
 
@@ -1135,7 +1135,7 @@ challenge("strchr", wasm => {
   equal(strchr(ascii("b")), 1);
 });
 
-challenge("strcmp", wasm => {
+challenge("strcmp", (wasm) => {
   const strcmp = expectFunc(wasm.instance.exports.strcmp);
   const memory = expectMemory(wasm.instance.exports.memory);
 
@@ -1184,7 +1184,7 @@ challenge("strcmp", wasm => {
   equal(strcmp(0, 4), 0);
 });
 
-challenge("uppercase", wasm => {
+challenge("uppercase", (wasm) => {
   const uppercase = expectFunc(wasm.instance.exports.uppercase);
   const memory = expectMemory(wasm.instance.exports.memory);
 
@@ -1212,7 +1212,7 @@ challenge("uppercase", wasm => {
   equal(test("'Challenging?'"), "'CHALLENGING?'");
 });
 
-todo("strstr", wasm => {});
+todo("strstr", (wasm) => {});
 
 todo("bracket_matching", (wasm) => {
   const _matching = expectFunc(wasm.instance.exports.matching);
@@ -1306,9 +1306,9 @@ challenge("parse_float", (wasm) => {
 
   // Invalid shorthand
   setMemoryStringAscii(memory, ".123");
-  equalClose(parse(), .123);
+  equalClose(parse(), 0.123);
   setMemoryStringAscii(memory, "-.123");
-  equalClose(parse(), -.123);
+  equalClose(parse(), -0.123);
 
   // Non-numeric strings
   setMemoryStringAscii(memory, "abc");
