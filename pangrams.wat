@@ -17,12 +17,7 @@
     (loop $loop
       ;; Read the next character from the string.
       (local.set $char
-        (call $upper
-          (i32.and
-            (i32.load (local.get $i))
-            (i32.const 0xff)
-          )
-        )
+        (call $upper (i32.load8_u (local.get $i)))
       )
 
       ;; Increment the index

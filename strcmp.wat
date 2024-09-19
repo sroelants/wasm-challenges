@@ -10,8 +10,8 @@
     (local $ch2 i32)
 
     (loop $loop
-      (local.set $ch1 (call $get_char (i32.add (local.get $str1) (local.get $i))))
-      (local.set $ch2 (call $get_char (i32.add (local.get $str2) (local.get $i))))
+      (local.set $ch1 (i32.load8_u (i32.add (local.get $str1) (local.get $i))))
+      (local.set $ch2 (i32.load8_u (i32.add (local.get $str2) (local.get $i))))
 
       ;; If the characters are not equal then the strings must be different.
       (if (i32.ne (local.get $ch1) (local.get $ch2))
@@ -31,13 +31,5 @@
     )
 
     unreachable
-  )
-
-  ;; Get the char at $i.
-  (func $get_char (param $i i32) (result i32)
-    (i32.and
-      (i32.load (local.get $i))
-      (i32.const 0xff)
-    )
   )
 )

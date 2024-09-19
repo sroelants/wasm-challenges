@@ -6,7 +6,7 @@
     (local $i i32)
 
     (loop $loop
-      (if (i32.eqz (call $get_char (local.get $i)))
+      (if (i32.eqz (i32.load8_u (local.get $i)))
         (then (return (local.get $i)))
       )
 
@@ -15,12 +15,5 @@
     )
 
     unreachable
-  )
-
-  (func $get_char (param $i i32) (result i32)
-    (i32.and
-      (i32.load (local.get $i))
-      (i32.const 0xff)
-    )
   )
 )

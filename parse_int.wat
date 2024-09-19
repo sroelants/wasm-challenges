@@ -14,12 +14,7 @@
 
     (loop $loop
       ;; Read the current char
-      (local.set $char
-          (i32.and
-            (i32.load (local.get $i))
-            (i32.const 0xff)
-          )
-      )
+      (local.set $char (i32.load8_u (local.get $i)))
 
       ;; Check whether we reached the end of the string
       (if (i32.eqz (local.get $char))

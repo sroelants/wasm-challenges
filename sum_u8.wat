@@ -16,7 +16,7 @@
       (local.set $total
         (i32.add
           (local.get $total)
-          (call $u8_load (local.get $i))
+          (i32.load8_u (local.get $i))
         )
       )
 
@@ -25,14 +25,5 @@
     )
 
     local.get $total
-  )
-
-  ;; There is no u8.load in WebAssembly so we'll instead load an i32 and mask
-  ;; it to discard the bits we don't care about.
-  (func $u8_load (param i32) (result i32)
-    (i32.and
-      (i32.load (local.get 0))
-      (i32.const 0xff)
-    )
   )
 )

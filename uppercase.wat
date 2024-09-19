@@ -2,18 +2,14 @@
   (memory (export "memory") 1)
 
   ;; Convert the ASCII string in memory to its uppercase equivalent.
-  ;;
-  ;; Hint: i32.store has an i32.store8 variant!
   (func (export "uppercase")
     (local $i i32)
     (local $val i32)
     (local $char i32)
 
     (loop $loop
-      ;; Read the full i32 at $i.
-      (local.set $val (i32.load (local.get $i)))
       ;; Read the first byte of $val.
-      (local.set $char (i32.and (local.get $val) (i32.const 0xff)))
+      (local.set $char (i32.load8_u (local.get $i)))
 
       ;; Return if we hit the null byte at the end of the string.
       (if (i32.eqz (local.get $char))

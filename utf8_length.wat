@@ -14,7 +14,7 @@
     (local $byte i32)
 
     (loop $loop
-      (local.set $byte (call $read_byte (local.get $i)))
+      (local.set $byte (i32.load8_u (local.get $i)))
 
       ;; Check if we reached the end of the string.
       (if (i32.eqz (local.get $byte))
@@ -54,12 +54,5 @@
     )
 
     unreachable
-  )
-
-  (func $read_byte (param $i i32) (result i32)
-    (i32.and
-      (i32.load (local.get $i))
-      (i32.const 0xff)
-    )
   )
 )

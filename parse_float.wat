@@ -32,7 +32,7 @@
       (select
         (i32.const -1)
         (i32.const 1)
-        (i32.eq (call $get_char (i32.const 0)) (i32.const 45))
+        (i32.eq (i32.load8_u (i32.const 0)) (i32.const 45))
       )
     )
 
@@ -45,7 +45,7 @@
     (block $int_block
       (loop $int_loop
         ;; Read the current char
-        (local.set $char (call $get_char (local.get $i)))
+        (local.set $char (i32.load8_u (local.get $i)))
 
         ;; Increment $i
         (local.set $i (i32.add (local.get $i) (i32.const 1)))
@@ -81,7 +81,7 @@
     (block $frac_block
       (loop $frac_loop
         ;; Read the current char
-        (local.set $char (call $get_char (local.get $i)))
+        (local.set $char (i32.load8_u (local.get $i)))
 
         ;; Increment $i
         (local.set $i (i32.add (local.get $i) (i32.const 1)))
@@ -121,13 +121,6 @@
           (f32.convert_i32_s (local.get $div))
         )
       )
-    )
-  )
-
-  (func $get_char (param $i i32) (result i32)
-    (i32.and
-      (i32.load (local.get $i))
-      (i32.const 0xff)
     )
   )
 

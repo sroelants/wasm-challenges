@@ -12,18 +12,11 @@
       (loop $inner
         (if
           (i32.eq
-            (call $get_char (i32.add (local.get $str1) (local.get $j)))
-            (call $get_char (i32.add (local.get $str2) (local.get $j)))
+            (i32.load8_u (i32.add (local.get $str1) (local.get $j)))
+            (i32.load8_u (i32.add (local.get $str2) (local.get $j)))
           )
         )
       )
-    )
-  )
-
-  (func $get_char (param $ptr i32) (result i32)
-    (i32.and
-      (i32.load (local.get $ptr))
-      (i32.const 0xff)
     )
   )
 )

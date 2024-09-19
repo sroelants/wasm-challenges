@@ -32,9 +32,6 @@
 
   ;; Return the rank of the $nth card.
   (func $rank (param $n i32) (result i32)
-    (i32.and
-      (i32.load (i32.mul (local.get $n) (i32.const 2)))
-      (i32.const 0xff)
-    )
+    (i32.load8_u (i32.mul (local.get $n) (i32.const 2)))
   )
 )

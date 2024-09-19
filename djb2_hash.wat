@@ -16,10 +16,7 @@
 
     (loop $loop
       (local.set $c
-        (i32.and
-          (i32.load (local.get $i))
-          (i32.const 0xff)
-        )
+        (i32.load8_u (local.get $i))
       )
 
       (if (i32.eqz (local.get $c))

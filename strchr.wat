@@ -9,12 +9,7 @@
     (local $ch i32)
 
     (loop $loop
-      (local.set $ch
-        (i32.and
-          (i32.load (local.get $i))
-          (i32.const 0xff)
-        )
-      )
+      (local.set $ch (i32.load8_u (local.get $i)))
 
       ;; Check if we hit the end of the string before finding the char.
       (if (i32.eqz (local.get $ch))
