@@ -12,6 +12,7 @@ const debug = {
   f64: (n) => console.log(n),
   bool: (n) => console.log(n ? true : false),
   char: (n) => console.log(String.fromCharCode(n)),
+  byte: (n) => console.log(`0x${n.toString(16).padStart(2, "0")}`),
 }
 
 /**
@@ -125,8 +126,19 @@ export function setMemoryStringAscii(memory, string, offset) {
   for (let i = 0; i < string.length; i++) {
     let code = string.charCodeAt(i);
     ok(code <= 0x0080, `Cannot encode non-ASCII character: ${string[i]}`);
-    view.setUint8(offset + i, string.charCodeAt(i));
+    view.setUint8(offset + i, code);
   }
+}
+
+/**
+ * @param {WebAssembly.Memory} memory
+ * @param {string} string
+ */
+export function setMemoryStringUtf8(memory, string) {
+  resetMemory(memory);
+  const encoder = new TextEncoder();
+  const view = new Uint8Array(memory.buffer);
+  encoder.encodeInto(string, view)
 }
 
 /**
