@@ -45,6 +45,8 @@ Every challenge can import functions for logging debug values at runtime.
   (import "debug" "f64" (func $debug_f64 (param f64)))
   (import "debug" "bool" (func $debug_bool (param i32)))
   (import "debug" "char" (func $debug_char (param i32)))
+  (import "debug" "byte" (func $debug_byte (param i32)))
+  (import "debug" "bits" (func $debug_bits (param i32)))
 
   ;; ...
 
