@@ -13,6 +13,7 @@ const debug = {
   bool: (n) => console.log(n ? true : false),
   char: (n) => console.log(String.fromCharCode(n)),
   byte: (n) => console.log(`0x${n.toString(16).padStart(2, "0")}`),
+  bits: (n) => console.log(n.toString(2)),
 }
 
 /**
