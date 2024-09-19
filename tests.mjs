@@ -21,6 +21,7 @@ import {
   A,
   K,
   ascii,
+  setMemoryStringUtf8,
 } from "./utils.mjs";
 
 // --- Arithmetic Challenges ---
@@ -1301,12 +1302,58 @@ challenge("parse_float", (wasm) => {
   equalClose(parse(), 0);
 });
 
+challenge("utf8_length", (wasm) => {
+  const strlen = expectFunc(wasm.instance.exports.strlen);
+  const memory = expectMemory(wasm.instance.exports.memory);
+
+  // UTF-8 is compatible with ASCII strings
+  setMemoryStringUtf8(memory, "");
+  equal(strlen(), 0);
+  setMemoryStringUtf8(memory, "abc");
+  equal(strlen(), 3);
+  setMemoryStringUtf8(memory, "Hello world");
+  equal(strlen(), 11);
+
+  // Greek (0370–03FF) in the 2-byte range
+  setMemoryStringUtf8(memory, "λόγος"); // Greek
+  equal(strlen(), 5);
+
+  // Arabic (0600–06FF) in the 2-byte range
+  setMemoryStringUtf8(memory, "كلمة"); // Arabic
+  equal(strlen(), 4);
+
+  // Sinhala (0D80–0DFF) in the 3-byte range
+  setMemoryStringUtf8(memory, "වචනය");
+  equal(strlen(), 4);
+
+  // Hangul (AC00–D7AF) in the 3-byte range
+  setMemoryStringUtf8(memory, "한글"); // Korean
+  equal(strlen(), 2);
+
+  // Runic (16A0–16FF) in the 3-byte range
+  setMemoryStringUtf8(memory, "ᚢᚬᚱᛏ");
+  equal(strlen(), 4);
+
+  // Geometric shapes (25A0–25FF) in the 3-byte range
+  setMemoryStringUtf8(memory, "■◐◤◉");
+  equal(strlen(), 4);
+
+  // Emoticons (1F600–1F64F) in the 4-byte range
+  setMemoryStringUtf8(memory, "😱😱😱😱😱");
+  equal(strlen(), 5);
+
+  // Characters from mixed ranges
+  setMemoryStringUtf8(memory, "Hello 🤴");
+  equal(strlen(), 7);
+  setMemoryStringUtf8(memory, "🂧 (7S)");
+  equal(strlen(), 6);
+});
+
 todo("ipv4_validation"); // Validate an ipv4 address
 todo("ipv6_validation"); // Validate an ipv6 address
 todo("run_length_encoding"); // Run-length encoding
 todo("run_length_decoding"); // Run-length decoding
 todo("pangrams"); // Check whether a string contains every letter of the alphabet
-todo("utf8_length"); // Find the length of a utf8 string
 
 // --- Cryptography Challenges ---
 
