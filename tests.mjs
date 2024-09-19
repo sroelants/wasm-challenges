@@ -1420,7 +1420,24 @@ todo("run_length_decoding"); // Run-length decoding
 
 // --- Cryptography Challenges ---
 
-todo("hash_djb2"); // djb2 hash function
+challenge("djb2_hash", (wasm) => {
+  const djb2 = expectFunc(wasm.instance.exports.djb2);
+  const memory = expectMemory(wasm.instance.exports.memory);
+
+  setMemoryStringAscii(memory, "");
+  equal(djb2(), 5381);
+
+  setMemoryStringAscii(memory, "hello");
+  equal(djb2(), 261238937);
+
+  setMemoryStringAscii(memory, "djb2");
+  equal(djb2(), 2090186023);
+
+  // Longer strings
+  setMemoryStringAscii(memory, "The quick brown fox jumps over the lazy dog");
+  equal(djb2(), 885799134);
+});
+
 todo("rot13_cipher"); // Rot13 cipher
 todo("xor_cipher"); // XOR Cipher with a key
 todo("substitution_cipher"); // Cipher with a custom alphabet
