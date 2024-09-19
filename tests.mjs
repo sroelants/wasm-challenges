@@ -1213,6 +1213,27 @@ challenge("uppercase", (wasm) => {
   equal(test("'Challenging?'"), "'CHALLENGING?'");
 });
 
+challenge("reverse_string", wasm => {
+  const reverse = expectFunc(wasm.instance.exports.reverse);
+  const memory = expectMemory(wasm.instance.exports.memory);
+
+  /** @param {string} inputString */
+  const test = (inputString) => {
+    setMemoryStringAscii(memory, inputString);
+    reverse();
+    return getMemoryStringAscii(memory);
+  };
+
+  equal(test(""), ""); // Empty string
+  equal(test("!"), "!"); // Single char
+  equal(test("1234"), "4321"); // Even-length string
+  equal(test("123"), "321"); // Odd-length string
+  equal(test("Hello"), "olleH"); // Case sensitivity
+  equal(test("reversed"), "desrever"); // Palindrome
+  equal(test("racecar"), "racecar"); // Palindrome
+  equal(test("redivider"), "redivider"); // Palindrome
+});
+
 todo("strstr", (wasm) => {});
 
 todo("bracket_matching", (wasm) => {
