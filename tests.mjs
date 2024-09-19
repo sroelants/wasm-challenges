@@ -1254,6 +1254,53 @@ challenge("parse_int", (wasm) => {
   equal(parse(), -1);
 });
 
+challenge("parse_float", (wasm) => {
+  const parse = expectFunc(wasm.instance.exports.parse);
+  const memory = expectMemory(wasm.instance.exports.memory);
+
+  // Basic floats
+  setMemoryStringAscii(memory, "123.456");
+  equalClose(parse(), 123.456);
+  setMemoryStringAscii(memory, "3.21");
+  equalClose(parse(), 3.21);
+  setMemoryStringAscii(memory, "0.123");
+  equalClose(parse(), 0.123);
+  setMemoryStringAscii(memory, "9876.5432");
+  equalClose(parse(), 9876.5432);
+
+  // Negative numbers
+  setMemoryStringAscii(memory, "-123.0");
+  equalClose(parse(), -123.0);
+  setMemoryStringAscii(memory, "-0.123");
+  equalClose(parse(), -0.123);
+
+  // Invalid shorthand
+  setMemoryStringAscii(memory, ".123");
+  equalClose(parse(), .123);
+  setMemoryStringAscii(memory, "-.123");
+  equalClose(parse(), -.123);
+
+  // Non-numeric strings
+  setMemoryStringAscii(memory, "abc");
+  equalClose(parse(), 0);
+  setMemoryStringAscii(memory, "abc.def");
+  equalClose(parse(), 0);
+  setMemoryStringAscii(memory, "-abc.def");
+  equalClose(parse(), 0);
+
+  // Mixed numeric strings
+  setMemoryStringAscii(memory, " 1.1");
+  equalClose(parse(), 0);
+  setMemoryStringAscii(memory, "1.1 ");
+  equalClose(parse(), 0);
+  setMemoryStringAscii(memory, "1.1a");
+  equalClose(parse(), 0);
+  setMemoryStringAscii(memory, "a1.1");
+  equalClose(parse(), 0);
+  setMemoryStringAscii(memory, "1x1.1");
+  equalClose(parse(), 0);
+});
+
 todo("ipv4_validation"); // Validate an ipv4 address
 todo("ipv6_validation"); // Validate an ipv6 address
 todo("run_length_encoding"); // Run-length encoding
