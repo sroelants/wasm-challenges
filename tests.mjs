@@ -22,6 +22,7 @@ import {
   K,
   ascii,
   setMemoryStringUtf8,
+  getMemoryStringAscii,
 } from "./utils.mjs";
 
 // --- Arithmetic Challenges ---
@@ -1181,6 +1182,34 @@ challenge("strcmp", wasm => {
   equal(strcmp(0, 4), 0);
   setMemoryStringAscii(memory, "123\x00312");
   equal(strcmp(0, 4), 0);
+});
+
+challenge("uppercase", wasm => {
+  const uppercase = expectFunc(wasm.instance.exports.uppercase);
+  const memory = expectMemory(wasm.instance.exports.memory);
+
+  /** @param {string} inputString */
+  const test = (inputString) => {
+    setMemoryStringAscii(memory, inputString);
+    uppercase();
+    return getMemoryStringAscii(memory);
+  };
+
+  // Fully lower case strings
+  equal(test("abc"), "ABC");
+  equal(test("hello world"), "HELLO WORLD");
+
+  // Mixed case strings
+  equal(test("Hello World"), "HELLO WORLD");
+  equal(test("WASM Challenges"), "WASM CHALLENGES");
+
+  // Upper case strings
+  equal(test("UPPERCASE"), "UPPERCASE");
+  equal(test("WASM"), "WASM");
+
+  // Punctuation
+  equal(test("Hello, world!"), "HELLO, WORLD!");
+  equal(test("'Challenging?'"), "'CHALLENGING?'");
 });
 
 todo("strstr", wasm => {});
