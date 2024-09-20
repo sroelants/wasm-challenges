@@ -1368,6 +1368,35 @@ challenge("parse_float", (wasm) => {
   equalClose(parse(), 0);
 });
 
+challenge("int_to_string", (wasm) => {
+  const intToString = expectFunc(wasm.instance.exports.toString);
+  const memory = expectMemory(wasm.instance.exports.memory);
+
+  intToString(0);
+  equal(getMemoryStringAscii(memory), "0");
+  resetMemory(memory);
+
+  intToString(12345);
+  equal(getMemoryStringAscii(memory), "12345");
+  resetMemory(memory);
+
+  intToString(777);
+  equal(getMemoryStringAscii(memory), "777");
+  resetMemory(memory);
+
+  intToString(87658377);
+  equal(getMemoryStringAscii(memory), "87658377");
+  resetMemory(memory);
+
+  intToString(-12345);
+  equal(getMemoryStringAscii(memory), "-12345");
+  resetMemory(memory);
+
+  intToString(-87658377);
+  equal(getMemoryStringAscii(memory), "-87658377");
+  resetMemory(memory);
+});
+
 challenge("utf8_length", (wasm) => {
   const strlen = expectFunc(wasm.instance.exports.strlen);
   const memory = expectMemory(wasm.instance.exports.memory);
