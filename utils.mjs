@@ -181,7 +181,7 @@ export function parseBitboard(...bits) {
  * @param {number} value
  */
 export function u32(value) {
-  return new Uint32Array([value])[0];
+  return value >>> 0;
 }
 
 /**
