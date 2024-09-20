@@ -1534,9 +1534,28 @@ challenge("rot13_cipher", (wasm) => {
   equal(test("To get to the other side!"), "Gb trg gb gur bgure fvqr!");
 });
 
-todo("xor_cipher"); // XOR Cipher with a key
+challenge("adler32_checksum", (wasm) => {
+  const adler32 = expectFunc(wasm.instance.exports.adler32);
+  const memory = expectMemory(wasm.instance.exports.memory);
+
+  /** @param {string} inputString */
+  const checksum = (inputString) => {
+    setMemoryStringAscii(memory, inputString);
+    return u32(adler32());
+  };
+
+  equal(checksum("Wikipedia"), 300286872); // Wikipedia example
+  equal(checksum(""), 1); // Empty string
+  equal(checksum("a"), 6422626); // Single character 'a'
+  equal(checksum("Z"), 5963867); // Single character 'Z'
+  equal(checksum("aaaaaa"), 133890631); // Repeating 'a' characters
+  equal(checksum("ZZZZZZZZ"), 212861649); // Repeating 'Z' characters
+  equal(checksum("1234567890"), 187433486); // Numbers in the string
+  equal(checksum("abc123XYZ"), 238486216); // Alphanumeric mix
+  equal(checksum("abcdefghijklmnopqrstuvwxyz"), 2424703776);
+});
+
 todo("substitution_cipher"); // Cipher with a custom alphabet
-todo("checksum"); // Adler-32 checksum
 
 // --- Turtle Challenges ---
 
