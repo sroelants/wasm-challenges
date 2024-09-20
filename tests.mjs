@@ -1234,7 +1234,50 @@ challenge("reverse_string", wasm => {
   equal(test("redivider"), "redivider"); // Palindrome
 });
 
-todo("strstr", (wasm) => {});
+challenge("strstr", (wasm) => {
+  const strstr = expectFunc(wasm.instance.exports.strstr);
+  const memory = expectMemory(wasm.instance.exports.memory);
+
+  setMemoryStringAscii(memory, "abc\0a\0");
+  equal(strstr(0, 4), 0);
+
+  setMemoryStringAscii(memory, "abc\0b\0");
+  equal(strstr(0, 4), 1);
+
+  setMemoryStringAscii(memory, "abc\0c\0");
+  equal(strstr(0, 4), 2);
+
+  setMemoryStringAscii(memory, "abc\0d\0");
+  equal(strstr(0, 4), -1);
+
+  // Empty search string
+  setMemoryStringAscii(memory, "abc");
+  equal(strstr(0, 4), 0);
+
+  // Empty string
+  setMemoryStringAscii(memory, "\0abc\0");
+  equal(strstr(0, 1), -1);
+
+  // Case sensitive
+  setMemoryStringAscii(memory, "hello\0LL\0");
+  equal(strstr(0, 6), -1);
+
+  // Same strings
+  setMemoryStringAscii(memory, "wasm\0wasm\0");
+  equal(strstr(0, 5), 0);
+
+  // Search is a subset
+  setMemoryStringAscii(memory, "wasm\0asm\0");
+  equal(strstr(0, 5), 1);
+
+  // Search is a superset
+  setMemoryStringAscii(memory, "wasm\0wasmer\0");
+  equal(strstr(0, 5), -1);
+
+  // Finds first instance
+  setMemoryStringAscii(memory, "wasm wasm wasm\0wasm\0");
+  equal(strstr(0, 15), 0);
+});
 
 todo("bracket_matching", (wasm) => {
   const _matching = expectFunc(wasm.instance.exports.matching);
