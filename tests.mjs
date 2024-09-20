@@ -487,32 +487,6 @@ challenge("bitboard", (wasm) => {
   equal(lookup(board, 4, 4), 1);
 });
 
-todo("bitboard64", (wasm) => {
-  const lookup = expectFunc(wasm.instance.exports.lookup);
-
-  // Can't use parseBitboard here because we need a bigint to store 8x8 bits and
-  // bigints don't work with bitwise operators or parsing from a binary string.
-  // The only other option I can think of is just to hardcode the literal and
-  // accept that it will be backwards.
-  const board =
-    0b1000010000_000000000_0010000100_00000000_1110111101_1000010000_000000000_0010000100_00000000_1110111101n;
-
-  // Check out-of-bounds bits
-  equal(lookup(board, -1n, 0n), -1n);
-  equal(lookup(board, 0n, -1n), -1n);
-  equal(lookup(board, 5n, 0n), -1n);
-  equal(lookup(board, 0n, 5n), -1n);
-
-  // Check up some in-bounds bits
-  equal(lookup(board, 0n, 0n), 1n);
-  equal(lookup(board, 1n, 0n), 0n);
-  equal(lookup(board, 2n, 0n), 1n);
-  equal(lookup(board, 2n, 2n), 1n);
-  equal(lookup(board, 1n, 2n), 0n);
-  equal(lookup(board, 3n, 2n), 0n);
-  equal(lookup(board, 4n, 4n), 1n);
-});
-
 challenge("xorshift32", (wasm) => {
   const xorshift32 = expectFunc(wasm.instance.exports.xorshift32);
   const seed = expectFunc(wasm.instance.exports.seed);
@@ -1050,8 +1024,6 @@ challenge("poker_high_card", (wasm) => {
 });
 
 todo("poker_pair", (wasm) => {});
-todo("poker_three_of_a_kind", (wasm) => {});
-todo("poker_four_of_a_kind", (wasm) => {});
 todo("poker_flush", (wasm) => {});
 todo("poker_straight", (wasm) => {});
 todo("poker_full_house", (wasm) => {});
