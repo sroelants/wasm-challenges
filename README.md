@@ -2,12 +2,17 @@
 
 Tiny programming challenges designed for learning about WebAssembly by writing it by hand.
 
-> [!WARNING]
-> The challenge files currently have _my_ solutions in, but I'll remove the solutions once I finish implementing the challenges.
+Each challenge has a [`.wat`][wat] file where you'll need to implement a WebAssembly module to pass the tests.
 
-Each challenge has a [`.wat`][wat] file where you'll need to implement a WebAssembly module to pass the tests in `tests.mjs`.
+Run `node tests.mjs` to run the tests and to see the recommended order for solving the challenges.
 
-Run `node tests.mjs` to run the tests.
+The challenges have descriptions within their `.wat` files, but it some cases it will also be useful to look inside `tests.mjs` to better understand the different test cases.
+
+Remove the `;; SOLVE` comment when you're ready to test your solution.
+
+If you get stuck or want to compare notes check out my `solutions` branch.
+
+_These challenges assume you have a programming background and are comfortable with some low-level concepts such as binary representations, bitwise operations, memory and pointers._
 
 ## Dependencies
 
@@ -16,21 +21,15 @@ To run the tests and compile `.wat` to `.wasm`, you'll need the following depend
 - [`node`](https://nodejs.org)
 - [`wabt`](https://github.com/WebAssembly/wabt)
 
-## Why?
-
-I created these challenges because I wanted to solve a set of simple problems to practice writing WebAssembly, however, most programming exercises online are designed for higher level languages and would be tedious to solve with handwritten assembly.
-
 ## Resources
 
-The challenges won't teach you about WAT syntax or WebAssembly instructions directly, so you'll need to do some WebAssembly-specific reading alongside.
+The challenges aren't designed to teach you WAT syntax or WebAssembly instructions directly, so you'll probably need to do some reading alongside.
 
 - [Understanding WebAssembly text format](https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format)
 - [WebAssembly instruction reference](https://developer.mozilla.org/en-US/docs/WebAssembly/Reference)
 - [WebAssembly specification](https://webassembly.github.io/spec/core/)
 
 Whilst not technically a reference, I found the [WebAssembly core test suite](https://github.com/WebAssembly/spec/tree/main/test/core) incredibly helpful for some exhaustive learning about the various instructions. The files are `.wast` and they include some testing directives, but otherwise they are all valid `.wat`.
-
-The challenges also assume you have a programming background and are comfortable with some low-level concepts such as binary representations, bitwise operations, memory and pointers.
 
 ## Debugging
 
