@@ -9,15 +9,6 @@
   ;;   lerp(10, 0, 0.5) => 5
   ;;
   (func (export "lerp") (param $a f64) (param $b f64) (param $t f64) (result f64)
-    (f64.add
-      (local.get $a)
-      (f64.mul
-        (local.get $t)
-        (f64.sub
-          (local.get $b)
-          (local.get $a)
-        )
-      )
-    )
+    ;; SOLVE
   )
 )
