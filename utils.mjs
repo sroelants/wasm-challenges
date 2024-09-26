@@ -3,7 +3,7 @@
 import { readFileSync } from "node:fs";
 import { fail, ok } from "node:assert";
 import { execSync } from "node:child_process";
-import test from "node:test";
+import test, { skip } from "node:test";
 
 const debug = {
   i32: (n) => console.log(n),
@@ -22,6 +22,12 @@ const debug = {
  * @param {(source: WebAssembly.WebAssemblyInstantiatedSource) => void} callback
  */
 export async function challenge(name, callback) {
+  const wat = readFileSync(`${name}.wat`, "utf-8");
+
+  // Skip the tests that still have a SOLVE placeholder in, because they
+  // probably won't actually compile.
+  if (/;; SOLVE/.test(wat)) return skip(`${name} (unsolved)`);
+
   return test(name, async () => {
     // Compile to /tmp to keep the directory a bit cleaner
     execSync(`wat2wasm ${name}.wat -o /tmp/${name}.wasm`);
