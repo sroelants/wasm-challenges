@@ -5,6 +5,7 @@ difficulty (easy/medium/hard?).
 # Progress
 - [✓] (Easy) abs.wat
 - [✓] (Easy) between.wat
+- [✓] (Easy) max.wat
 - [ ] adler32_checksum.wat
 - [ ] bitboard.wat
 - [ ] brainfuck.wat
@@ -28,7 +29,6 @@ difficulty (easy/medium/hard?).
 - [ ] ipv4_parser.wat
 - [ ] lerp.wat
 - [ ] load_from_memory.wat
-- [ ] max.wat
 - [ ] mean.wat
 - [ ] pangrams.wat
 - [ ] parse_float.wat
