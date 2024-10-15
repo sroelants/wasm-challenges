@@ -10,6 +10,12 @@
   ;; Returns pseudo-random numbers from an implementation of xorshift32.
   ;; See https://en.wikipedia.org/wiki/Xorshift.
   (func (export "xorshift32") (result i32)
-    ;; SOLVE
-  )
-)
+        (local $x i32)
+        (local.set $x (global.get $state))
+
+        (local.set $x (i32.xor (local.get $x) (i32.shl   (local.get $x) (i32.const 13))))
+        (local.set $x (i32.xor (local.get $x) (i32.shr_u (local.get $x) (i32.const 17))))
+        (local.set $x (i32.xor (local.get $x) (i32.shl   (local.get $x) (i32.const  5))))
+
+        (global.set $state (local.get $x))
+        (local.get $x)))

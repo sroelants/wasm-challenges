@@ -19,6 +19,7 @@ difficulty (easy/medium/hard?).
 - [✓] (Easy) rgb_to_bgr.wat
 - [✓] (Easy) hamming_weight.wat
 - [✓] (Easy) bitboard.wat
+- [✓] (Medium) xorshift32.wat
 - [ ] adler32_checksum.wat
 - [ ] brainfuck.wat
 - [ ] chess_moves_bishop.wat
@@ -55,4 +56,3 @@ difficulty (easy/medium/hard?).
 - [ ] uppercase.wat
 - [ ] utf8_length.wat
 - [ ] vowel.wat
-- [ ] xorshift32.wat
