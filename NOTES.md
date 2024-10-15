@@ -14,10 +14,10 @@ difficulty (easy/medium/hard?).
 - [✓] (Easy) lerp.wat
 - [✓] (Easy) clamp.wat
 - [✓] (Medium) prime.wat
+- [✓] (Easy) calculate.wat
 - [ ] adler32_checksum.wat
 - [ ] bitboard.wat
 - [ ] brainfuck.wat
-- [ ] calculate.wat
 - [ ] chess_moves_bishop.wat
 - [ ] chess_moves_king.wat
 - [ ] chess_moves_knight.wat
