@@ -6,7 +6,8 @@ difficulty (easy/medium/hard?).
 - [✓] (Easy) abs.wat
 - [✓] (Easy) between.wat
 - [✓] (Easy) max.wat
-- [ ] (Easy) increment.wat
+- [✓] (Easy) increment.wat
+- [✓] (Easy) double.wat
 - [ ] adler32_checksum.wat
 - [ ] bitboard.wat
 - [ ] brainfuck.wat
@@ -20,7 +21,6 @@ difficulty (easy/medium/hard?).
 - [ ] clamp.wat
 - [ ] counting.wat
 - [ ] djb2_hash.wat
-- [ ] double.wat
 - [ ] euclidean_distance.wat
 - [ ] even.wat
 - [ ] hamming_weight.wat
