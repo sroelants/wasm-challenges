@@ -16,6 +16,7 @@ difficulty (easy/medium/hard?).
 - [✓] (Medium) prime.wat
 - [✓] (Easy) calculate.wat
 - [✓] (Easy) rgb_pack.wat
+- [✓] (Easy) rgb_to_bgr.wat
 - [ ] adler32_checksum.wat
 - [ ] bitboard.wat
 - [ ] brainfuck.wat
@@ -42,7 +43,6 @@ difficulty (easy/medium/hard?).
 - [ ] poker_rank_value.wat
 - [ ] poker_suit_value.wat
 - [ ] reverse_string.wat
-- [ ] rgb_to_bgr.wat
 - [ ] rot13_cipher.wat
 - [ ] store_in_memory.wat
 - [ ] strchr.wat
