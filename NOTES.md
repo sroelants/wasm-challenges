@@ -12,6 +12,7 @@ difficulty (easy/medium/hard?).
 - [✓] (Easy) pow.wat
 - [✓] (Medium) triangular.wat
 - [✓] (Easy) lerp.wat
+- [✓] (Easy) clamp.wat
 - [ ] adler32_checksum.wat
 - [ ] bitboard.wat
 - [ ] brainfuck.wat
@@ -22,7 +23,6 @@ difficulty (easy/medium/hard?).
 - [ ] chess_moves_pawn.wat
 - [ ] chess_moves_queen.wat
 - [ ] chess_moves_rook.wat
-- [ ] clamp.wat
 - [ ] counting.wat
 - [ ] djb2_hash.wat
 - [ ] euclidean_distance.wat
