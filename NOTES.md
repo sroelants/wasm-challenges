@@ -13,6 +13,7 @@ difficulty (easy/medium/hard?).
 - [✓] (Medium) triangular.wat
 - [✓] (Easy) lerp.wat
 - [✓] (Easy) clamp.wat
+- [✓] (Medium) prime.wat
 - [ ] adler32_checksum.wat
 - [ ] bitboard.wat
 - [ ] brainfuck.wat
@@ -39,7 +40,6 @@ difficulty (easy/medium/hard?).
 - [ ] poker_pair.wat
 - [ ] poker_rank_value.wat
 - [ ] poker_suit_value.wat
-- [ ] prime.wat
 - [ ] reverse_string.wat
 - [ ] rgb_pack.wat
 - [ ] rgb_to_bgr.wat
