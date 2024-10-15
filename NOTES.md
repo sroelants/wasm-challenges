@@ -24,9 +24,9 @@ difficulty (easy/medium/hard?).
 - [✓] (Medium) taxicab_distance.wat
 - [✓] (Easy) euclidean_distance.wat
 - [✓] (Medium) chess_moves_rook.wat
+- [✓] (Medium) chess_moves_bishop.wat
 - [ ] adler32_checksum.wat
 - [ ] brainfuck.wat
-- [ ] chess_moves_bishop.wat
 - [ ] chess_moves_king.wat
 - [ ] chess_moves_knight.wat
 - [ ] chess_moves_pawn.wat
