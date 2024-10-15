@@ -17,6 +17,7 @@ difficulty (easy/medium/hard?).
 - [✓] (Easy) calculate.wat
 - [✓] (Easy) rgb_pack.wat
 - [✓] (Easy) rgb_to_bgr.wat
+- [✓] (Easy) hamming_weight.wat
 - [ ] adler32_checksum.wat
 - [ ] bitboard.wat
 - [ ] brainfuck.wat
@@ -29,7 +30,6 @@ difficulty (easy/medium/hard?).
 - [ ] counting.wat
 - [ ] djb2_hash.wat
 - [ ] euclidean_distance.wat
-- [ ] hamming_weight.wat
 - [ ] high_bit.wat
 - [ ] int_to_string.wat
 - [ ] ipv4_parser.wat
