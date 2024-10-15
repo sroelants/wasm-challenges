@@ -9,6 +9,7 @@ difficulty (easy/medium/hard?).
 - [✓] (Easy) increment.wat
 - [✓] (Easy) double.wat
 - [✓] (Easy) even.wat
+- [✓] (Easy) pow.wat
 - [ ] adler32_checksum.wat
 - [ ] bitboard.wat
 - [ ] brainfuck.wat
@@ -37,7 +38,6 @@ difficulty (easy/medium/hard?).
 - [ ] poker_pair.wat
 - [ ] poker_rank_value.wat
 - [ ] poker_suit_value.wat
-- [ ] pow.wat
 - [ ] prime.wat
 - [ ] reverse_string.wat
 - [ ] rgb_pack.wat
