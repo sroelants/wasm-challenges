@@ -10,6 +10,7 @@ difficulty (easy/medium/hard?).
 - [✓] (Easy) double.wat
 - [✓] (Easy) even.wat
 - [✓] (Easy) pow.wat
+- [✓] (Easy) triangular.wat
 - [ ] adler32_checksum.wat
 - [ ] bitboard.wat
 - [ ] brainfuck.wat
@@ -51,7 +52,6 @@ difficulty (easy/medium/hard?).
 - [ ] sum_i32.wat
 - [ ] sum_u8.wat
 - [ ] taxicab_distance.wat
-- [ ] triangular.wat
 - [ ] uppercase.wat
 - [ ] utf8_length.wat
 - [ ] vowel.wat
