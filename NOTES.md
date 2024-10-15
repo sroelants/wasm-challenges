@@ -3,7 +3,7 @@ Gonna try and keep track of the challenges I've completed, and their (rough)
 difficulty (easy/medium/hard?).
 
 # Progress
-- [ ] abs.wat
+- [✓] (Easy) abs.wat
 - [ ] adler32_checksum.wat
 - [ ] between.wat
 - [ ] bitboard.wat
