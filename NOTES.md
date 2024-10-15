@@ -20,6 +20,7 @@ difficulty (easy/medium/hard?).
 - [✓] (Easy) hamming_weight.wat
 - [✓] (Easy) bitboard.wat
 - [✓] (Medium) xorshift32.wat
+- [✓] (Medium) high_bit.wat
 - [ ] adler32_checksum.wat
 - [ ] brainfuck.wat
 - [ ] chess_moves_bishop.wat
@@ -31,7 +32,6 @@ difficulty (easy/medium/hard?).
 - [ ] counting.wat
 - [ ] djb2_hash.wat
 - [ ] euclidean_distance.wat
-- [ ] high_bit.wat
 - [ ] int_to_string.wat
 - [ ] ipv4_parser.wat
 - [ ] load_from_memory.wat
