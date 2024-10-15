@@ -22,6 +22,8 @@ difficulty (easy/medium/hard?).
 - [✓] (Medium) xorshift32.wat
 - [✓] (Medium) high_bit.wat
 - [✓] (Medium) taxicab_distance.wat
+- [✓] (Easy) euclidean_distance.wat
+- [✓] (Medium) chess_moves_rook.wat
 - [ ] adler32_checksum.wat
 - [ ] brainfuck.wat
 - [ ] chess_moves_bishop.wat
@@ -29,10 +31,8 @@ difficulty (easy/medium/hard?).
 - [ ] chess_moves_knight.wat
 - [ ] chess_moves_pawn.wat
 - [ ] chess_moves_queen.wat
-- [ ] chess_moves_rook.wat
 - [ ] counting.wat
 - [ ] djb2_hash.wat
-- [ ] euclidean_distance.wat
 - [ ] int_to_string.wat
 - [ ] ipv4_parser.wat
 - [ ] load_from_memory.wat
