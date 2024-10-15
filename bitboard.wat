@@ -17,6 +17,23 @@
   ;; ##
   ;;
   (func (export "lookup") (param $board i32) (param $x i32) (param $y i32) (result i32)
-    ;; SOLVE
-  )
-)
+        (local $idx i32)
+
+        ;; Return if $x is out of bounds
+        (if (i32.or 
+              (i32.ge_s (local.get $x) (i32.const 5))
+              (i32.lt_s (local.get $x) (i32.const 0)))
+          (then (return (i32.const -1))))
+
+        ;; Return if $y is out of bounds
+        (if (i32.or 
+              (i32.ge_s (local.get $y) (i32.const 5))
+              (i32.lt_s (local.get $y) (i32.const 0)))
+          (then (return (i32.const -1))))
+
+        ;; Convert into a bit index
+        (local.set $idx (i32.add 
+                          (i32.mul (local.get $y) (i32.const 5)) 
+                          (local.get $x)))
+
+        (i32.and (i32.shr_u (local.get $board) (local.get $idx)) (i32.const 1))))

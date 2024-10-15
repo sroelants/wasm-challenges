@@ -18,8 +18,8 @@ difficulty (easy/medium/hard?).
 - [✓] (Easy) rgb_pack.wat
 - [✓] (Easy) rgb_to_bgr.wat
 - [✓] (Easy) hamming_weight.wat
+- [✓] (Easy) bitboard.wat
 - [ ] adler32_checksum.wat
-- [ ] bitboard.wat
 - [ ] brainfuck.wat
 - [ ] chess_moves_bishop.wat
 - [ ] chess_moves_king.wat
