@@ -10,7 +10,8 @@ difficulty (easy/medium/hard?).
 - [✓] (Easy) double.wat
 - [✓] (Easy) even.wat
 - [✓] (Easy) pow.wat
-- [✓] (Easy) triangular.wat
+- [✓] (Medium) triangular.wat
+- [✓] (Easy) lerp.wat
 - [ ] adler32_checksum.wat
 - [ ] bitboard.wat
 - [ ] brainfuck.wat
@@ -29,7 +30,6 @@ difficulty (easy/medium/hard?).
 - [ ] high_bit.wat
 - [ ] int_to_string.wat
 - [ ] ipv4_parser.wat
-- [ ] lerp.wat
 - [ ] load_from_memory.wat
 - [ ] mean.wat
 - [ ] pangrams.wat
