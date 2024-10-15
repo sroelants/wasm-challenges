@@ -4,8 +4,8 @@ difficulty (easy/medium/hard?).
 
 # Progress
 - [✓] (Easy) abs.wat
+- [✓] (Easy) between.wat
 - [ ] adler32_checksum.wat
-- [ ] between.wat
 - [ ] bitboard.wat
 - [ ] brainfuck.wat
 - [ ] calculate.wat
