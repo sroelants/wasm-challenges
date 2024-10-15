@@ -21,6 +21,7 @@ difficulty (easy/medium/hard?).
 - [✓] (Easy) bitboard.wat
 - [✓] (Medium) xorshift32.wat
 - [✓] (Medium) high_bit.wat
+- [✓] (Medium) taxicab_distance.wat
 - [ ] adler32_checksum.wat
 - [ ] brainfuck.wat
 - [ ] chess_moves_bishop.wat
@@ -52,7 +53,6 @@ difficulty (easy/medium/hard?).
 - [ ] strstr.wat
 - [ ] sum_i32.wat
 - [ ] sum_u8.wat
-- [ ] taxicab_distance.wat
 - [ ] uppercase.wat
 - [ ] utf8_length.wat
 - [ ] vowel.wat
