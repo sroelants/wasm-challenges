@@ -6,6 +6,7 @@ difficulty (easy/medium/hard?).
 - [✓] (Easy) abs.wat
 - [✓] (Easy) between.wat
 - [✓] (Easy) max.wat
+- [ ] (Easy) increment.wat
 - [ ] adler32_checksum.wat
 - [ ] bitboard.wat
 - [ ] brainfuck.wat
@@ -24,7 +25,6 @@ difficulty (easy/medium/hard?).
 - [ ] even.wat
 - [ ] hamming_weight.wat
 - [ ] high_bit.wat
-- [ ] increment.wat
 - [ ] int_to_string.wat
 - [ ] ipv4_parser.wat
 - [ ] lerp.wat
