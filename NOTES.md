@@ -38,6 +38,8 @@ difficulty (easy/medium/hard?).
 - [✓] (Easy) poker_rank_value.wat
 - [✓] (Easy) poker_suit_value.wat
 - [✓] (Medium) poker_high_card.wat
+- [✓] (Easy) vowel.wat
+- [✓] (Medium) strlen.wat
 - [ ] poker_pair.wat
 - [ ] adler32_checksum.wat
 - [ ] brainfuck.wat
@@ -51,8 +53,6 @@ difficulty (easy/medium/hard?).
 - [ ] rot13_cipher.wat
 - [ ] strchr.wat
 - [ ] strcmp.wat
-- [ ] strlen.wat
 - [ ] strstr.wat
 - [ ] uppercase.wat
 - [ ] utf8_length.wat
-- [ ] vowel.wat
