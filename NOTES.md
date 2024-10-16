@@ -29,13 +29,13 @@ difficulty (easy/medium/hard?).
 - [✓] (Medium) chess_moves_pawn.wat
 - [✓] (Medium) chess_moves_king.wat
 - [✓] (Medium) chess_moves_queen.wat
+- [✓] (Easy) load_from_memory.wat
 - [ ] adler32_checksum.wat
 - [ ] brainfuck.wat
 - [ ] counting.wat
 - [ ] djb2_hash.wat
 - [ ] int_to_string.wat
 - [ ] ipv4_parser.wat
-- [ ] load_from_memory.wat
 - [ ] mean.wat
 - [ ] pangrams.wat
 - [ ] parse_float.wat
