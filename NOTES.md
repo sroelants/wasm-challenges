@@ -26,11 +26,11 @@ difficulty (easy/medium/hard?).
 - [✓] (Medium) chess_moves_rook.wat
 - [✓] (Medium) chess_moves_bishop.wat
 - [✓] (Medium) chess_moves_knight.wat
+- [✓] (Medium) chess_moves_pawn.wat
 - [✓] (Medium) chess_moves_queen.wat
 - [ ] adler32_checksum.wat
 - [ ] brainfuck.wat
 - [ ] chess_moves_king.wat
-- [ ] chess_moves_pawn.wat
 - [ ] counting.wat
 - [ ] djb2_hash.wat
 - [ ] int_to_string.wat

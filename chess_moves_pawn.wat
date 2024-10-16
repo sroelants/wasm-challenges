@@ -10,6 +10,16 @@
   ;;
   ;; Return 1 if the move would be legal, otherwise return 0.
   (func (export "pawn") (param $x0 i32) (param $y0 i32) (param $x1 i32) (param $y1 i32) (result i32)
-    ;; SOLVE
-  )
-)
+    (local $dx i32)
+    (local $dy i32)
+    (local $startpos i32)
+
+    (local.set $dx (i32.sub (local.get $x1) (local.get $x0)))
+    (local.set $dy (i32.sub (local.get $y1) (local.get $y0)))
+    (local.set $startpos (i32.eq (local.get $y0) (i32.const 1)))
+
+    (i32.and 
+      (i32.eqz (local.get $dx))
+      (i32.or (i32.eq (local.get $dy) (i32.const 1))
+              (i32.and (local.get $startpos) 
+                       (i32.eq (local.get $dy) (i32.const 2)))))))
