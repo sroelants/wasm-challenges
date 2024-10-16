@@ -4,6 +4,23 @@
   ;;
   ;; Return 1 if the move would be legal, otherwise return 0.
   (func (export "king") (param $x0 i32) (param $y0 i32) (param $x1 i32) (param $y1 i32) (result i32)
-    ;; SOLVE
-  )
-)
+    (local $dx i32)
+    (local $dy i32)
+
+    ;; Not moving is illegal
+    (if (i32.and 
+          (i32.eq (local.get $x0) (local.get $x1)) 
+          (i32.eq (local.get $y0) (local.get $y1)))
+      (then (return (i32.const 0))))
+
+    (local.set $dx (i32.sub (local.get $x1) (local.get $x0)))
+    (local.set $dy (i32.sub (local.get $y1) (local.get $y0)))
+
+    (i32.and 
+      (i32.and 
+        (i32.ge_s (local.get $dx) (i32.const -1))
+        (i32.le_s (local.get $dx) (i32.const 1))
+      (i32.and 
+        (i32.ge_s (local.get $dy) (i32.const -1))
+        (i32.le_s (local.get $dy) (i32.const 1)))))))
+
