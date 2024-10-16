@@ -41,6 +41,8 @@ difficulty (easy/medium/hard?).
 - [✓] (Easy) vowel.wat
 - [✓] (Medium) strlen.wat
 - [✓] (Medium) strchr.wat
+- [✓] (Medium) strcmp.wat
+- [✓] uppercase.wat
 - [ ] poker_pair.wat
 - [ ] adler32_checksum.wat
 - [ ] brainfuck.wat
@@ -52,7 +54,5 @@ difficulty (easy/medium/hard?).
 - [ ] parse_int.wat
 - [ ] reverse_string.wat
 - [ ] rot13_cipher.wat
-- [ ] strcmp.wat
 - [ ] strstr.wat
-- [ ] uppercase.wat
 - [ ] utf8_length.wat
