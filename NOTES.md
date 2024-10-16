@@ -31,6 +31,7 @@ difficulty (easy/medium/hard?).
 - [✓] (Medium) chess_moves_queen.wat
 - [✓] (Easy) load_from_memory.wat
 - [✓] (Easy) store_in_memory.wat
+- [✓] (Medium) sum_i32.wat
 - [ ] adler32_checksum.wat
 - [ ] brainfuck.wat
 - [ ] counting.wat
@@ -51,7 +52,6 @@ difficulty (easy/medium/hard?).
 - [ ] strcmp.wat
 - [ ] strlen.wat
 - [ ] strstr.wat
-- [ ] sum_i32.wat
 - [ ] sum_u8.wat
 - [ ] uppercase.wat
 - [ ] utf8_length.wat
