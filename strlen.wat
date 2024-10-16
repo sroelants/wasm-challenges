@@ -23,6 +23,4 @@
 
       ;; goto start of the loop if we're not done yet
       (br $loop))
-
-    ;; return the result
-    (local.get $result)))
+    (unreachable)))
