@@ -36,6 +36,8 @@ difficulty (easy/medium/hard?).
 - [✓] (Medium) mean.wat
 - [✓] (Medium) counting.wat
 - [✓] (Easy) poker_rank_value.wat
+- [✓] (Easy) poker_suit_value.wat
+- [✓] (Medium) poker_high_card.wat
 - [ ] adler32_checksum.wat
 - [ ] brainfuck.wat
 - [ ] djb2_hash.wat
@@ -44,9 +46,7 @@ difficulty (easy/medium/hard?).
 - [ ] pangrams.wat
 - [ ] parse_float.wat
 - [ ] parse_int.wat
-- [ ] poker_high_card.wat
 - [ ] poker_pair.wat
-- [ ] poker_suit_value.wat
 - [ ] reverse_string.wat
 - [ ] rot13_cipher.wat
 - [ ] strchr.wat
