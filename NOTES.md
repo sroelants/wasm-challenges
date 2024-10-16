@@ -30,6 +30,7 @@ difficulty (easy/medium/hard?).
 - [✓] (Medium) chess_moves_king.wat
 - [✓] (Medium) chess_moves_queen.wat
 - [✓] (Easy) load_from_memory.wat
+- [✓] (Easy) store_in_memory.wat
 - [ ] adler32_checksum.wat
 - [ ] brainfuck.wat
 - [ ] counting.wat
@@ -46,7 +47,6 @@ difficulty (easy/medium/hard?).
 - [ ] poker_suit_value.wat
 - [ ] reverse_string.wat
 - [ ] rot13_cipher.wat
-- [ ] store_in_memory.wat
 - [ ] strchr.wat
 - [ ] strcmp.wat
 - [ ] strlen.wat
