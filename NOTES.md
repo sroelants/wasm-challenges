@@ -33,13 +33,13 @@ difficulty (easy/medium/hard?).
 - [✓] (Easy) store_in_memory.wat
 - [✓] (Medium) sum_i32.wat
 - [✓] (Medium) sum_u8.wat
+- [ ] (Medium) mean.wat
 - [ ] adler32_checksum.wat
 - [ ] brainfuck.wat
 - [ ] counting.wat
 - [ ] djb2_hash.wat
 - [ ] int_to_string.wat
 - [ ] ipv4_parser.wat
-- [ ] mean.wat
 - [ ] pangrams.wat
 - [ ] parse_float.wat
 - [ ] parse_int.wat
