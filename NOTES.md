@@ -35,7 +35,7 @@ difficulty (easy/medium/hard?).
 - [✓] (Medium) sum_u8.wat
 - [✓] (Medium) mean.wat
 - [✓] (Medium) counting.wat
-- [ ] (Easy) poker_rank_value.wat
+- [✓] (Easy) poker_rank_value.wat
 - [ ] adler32_checksum.wat
 - [ ] brainfuck.wat
 - [ ] djb2_hash.wat
